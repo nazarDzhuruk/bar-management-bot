@@ -23,7 +23,9 @@ public class AlcoholDrink {
     protected AlcoholDrink() {
     }
 
-    public AlcoholDrink(int productCode, String name, String type, int quantityBottle, float litre) {
+    public AlcoholDrink(Stock alcoholStock,int productCode,
+                        String name, String type, int quantityBottle, float litre) {
+        this.alcoholStock = alcoholStock;
         this.productCode = productCode;
         this.name = name;
         this.type = type;
@@ -101,4 +103,48 @@ public class AlcoholDrink {
     public int hashCode() {
         return Objects.hash(id, productCode, name, type, alcoholStock);
     }
+
+    public static AlcoholDrink.AlcoholDrinkBuilder builder() {
+        return new AlcoholDrinkBuilder();
+    }
+
+    public static class AlcoholDrinkBuilder {
+        private Long id;
+        private int productCode;
+        private String name;
+        private int quantityBottle;
+        private float litre;
+        private String type;
+        private Stock alcoholStock;
+
+        public AlcoholDrink.AlcoholDrinkBuilder productCode(int productCode) {
+            this.productCode = productCode;
+            return this;
+        }
+
+        public AlcoholDrink.AlcoholDrinkBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public AlcoholDrink.AlcoholDrinkBuilder quantityBottle(int quantityBottle) {
+            this.quantityBottle = quantityBottle;
+            return this;
+        }
+
+        public AlcoholDrink.AlcoholDrinkBuilder litre(float litre) {
+            this.litre = litre;
+            return this;
+        }
+        public AlcoholDrink.AlcoholDrinkBuilder stock(Stock alcoholStock){
+            this.alcoholStock = alcoholStock;
+            return this;
+        }
+
+        public AlcoholDrink build() {
+            return new AlcoholDrink(this.alcoholStock, this.productCode,
+                    this.name, this.type, this.quantityBottle, this.litre);
+        }
+    }
+
 }
