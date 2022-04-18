@@ -34,6 +34,6 @@ public class AlcoholCallback implements TelegramCallback {
 
     @Override
     public CallbackType getImplementation() {
-        return CallbackType.ALCOHOL;
+        return CallbackType.SELL_ALCOHOL;
     }
 }
