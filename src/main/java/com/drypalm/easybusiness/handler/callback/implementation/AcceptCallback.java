@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 public class AcceptCallback implements TelegramCallback {
     private final KeyboardFactory keyboard;
     private static final String PREVIOUS_PAGE = "add";
-    private static final String TEXT = "enter product code";
+    private static final String TEXT = "accepting goods \n\r\n" + "enter product code";
 
     public AcceptCallback(KeyboardFactory keyboard) {
         this.keyboard = keyboard;
@@ -25,7 +25,7 @@ public class AcceptCallback implements TelegramCallback {
 
         return EditMessageText.builder().chatId(chatId)
                 .messageId(messageId).text(TEXT)
-                .replyMarkup(keyboard.getService(KeyboardType.HELPFUL).getKeyboard(PREVIOUS_PAGE)).build();
+                .replyMarkup(keyboard.getService(KeyboardType.SELL).getKeyboard(PREVIOUS_PAGE)).build();
     }
 
     @Override
