@@ -7,7 +7,8 @@ public enum MessageCommand {
     REGISTER("/r", "register new user (only admin)"),
     LOGIN("/li", "login as employee: example: /l ****"),
     LOGOUT("/lo", "logout user"),
-    EXIT("/exit", "stops application (only admin)");
+    EXIT("/exit", "stops application (only admin)"),
+    ADD_ALCO("/qweewq", "");
 
     private final String command;
     private final String description;
