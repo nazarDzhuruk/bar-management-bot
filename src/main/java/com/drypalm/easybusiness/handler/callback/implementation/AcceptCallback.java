@@ -25,11 +25,11 @@ public class AcceptCallback implements TelegramCallback {
 
         return EditMessageText.builder().chatId(chatId)
                 .messageId(messageId).text(TEXT)
-                .replyMarkup(keyboard.getService(KeyboardType.SELL).getKeyboard(PREVIOUS_PAGE)).build();
+                .replyMarkup(keyboard.getService(KeyboardType.MAIN_ACCEPT).getKeyboard(PREVIOUS_PAGE)).build();
     }
 
     @Override
     public CallbackType getImplementation() {
-        return CallbackType.ACCEPT;
+        return CallbackType.MAIN_ACCEPT;
     }
 }
