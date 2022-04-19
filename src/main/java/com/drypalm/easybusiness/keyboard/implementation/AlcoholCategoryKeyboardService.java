@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +23,14 @@ public class AlcoholCategoryKeyboardService implements KeyboardService {
 
     @Override
     public InlineKeyboardMarkup getKeyboard(String callback) {
-        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
         List<String> alcoholType = stockService.index().get(0)
                 .getAlcoholDrinkSet().stream().map(AlcoholDrink::getType).collect(Collectors.toList());
 
-        buttons.add(ButtonCreator.createButtons(alcoholType, callback));
+        List<List<InlineKeyboardButton>> buttons = alcoholType
+                .stream().map(a -> ButtonCreator.createButtons(List.of(a), "type"))
+                .collect(Collectors.toList());
+
         buttons.add(ButtonCreator.createButtons(List.of(BACK.getButton(), MAIN_MENU.getButton()), callback));
 
         return InlineKeyboardMarkup.builder().keyboard(buttons).build();

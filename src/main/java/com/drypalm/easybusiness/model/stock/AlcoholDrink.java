@@ -23,7 +23,7 @@ public class AlcoholDrink {
     protected AlcoholDrink() {
     }
 
-    public AlcoholDrink(Stock alcoholStock,int productCode,
+    public AlcoholDrink(Stock alcoholStock, int productCode,
                         String name, String type, int quantityBottle, float litre) {
         this.alcoholStock = alcoholStock;
         this.productCode = productCode;
@@ -122,6 +122,11 @@ public class AlcoholDrink {
             return this;
         }
 
+        public AlcoholDrink.AlcoholDrinkBuilder type(String type) {
+            this.type = type;
+            return this;
+        }
+
         public AlcoholDrink.AlcoholDrinkBuilder name(String name) {
             this.name = name;
             return this;
@@ -136,7 +141,8 @@ public class AlcoholDrink {
             this.litre = litre;
             return this;
         }
-        public AlcoholDrink.AlcoholDrinkBuilder stock(Stock alcoholStock){
+
+        public AlcoholDrink.AlcoholDrinkBuilder stock(Stock alcoholStock) {
             this.alcoholStock = alcoholStock;
             return this;
         }

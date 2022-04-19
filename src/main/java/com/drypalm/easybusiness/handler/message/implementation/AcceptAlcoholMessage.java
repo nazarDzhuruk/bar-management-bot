@@ -33,8 +33,8 @@ public class AcceptAlcoholMessage implements TelegramMessage {
             stocks.add(stock);
             stockService.add(stock);
         }
-        AlcoholDrink drink = AlcoholDrink.builder().name(product[0])
-                .quantityBottle(Integer.parseInt(product[1])).litre(Long.parseLong(product[2]))
+        AlcoholDrink drink = AlcoholDrink.builder().type(product[0]).name(product[1])
+                .quantityBottle(Integer.parseInt(product[2])).litre(Float.parseFloat(product[3]))
                 .stock(stocks.get(0)).build();
 
         alcoholDrinkService.add(drink);

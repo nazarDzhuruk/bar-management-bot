@@ -1,5 +1,6 @@
 package com.drypalm.easybusiness.keyboard.implementation;
 
+import com.drypalm.easybusiness.handler.callback.CallbackType;
 import com.drypalm.easybusiness.keyboard.KeyboardType;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -22,7 +23,8 @@ public class SellKeyboardService implements KeyboardService {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
         buttons.add(ButtonCreator.createButtons(
-                List.of(ALCOHOL, SOFT, COCKTAIL), callback));
+                List.of(CallbackType.SELL_ALCOHOL.getCallback(),
+                        CallbackType.SELL_SOFT.getCallback(), CallbackType.SELL_COCKTAIL.getCallback()), callback));
 
         buttons.add(ButtonCreator.createButtons(List.of(BACK.getButton(),
                 MAIN_MENU.getButton()), callback));

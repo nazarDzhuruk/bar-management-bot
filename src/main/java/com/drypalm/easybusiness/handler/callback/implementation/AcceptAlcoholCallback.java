@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 @Component
 public class AcceptAlcoholCallback implements TelegramCallback {
-    private static final String MESSAGE = "FORMAT: \r\n\r" + "name-bottles-litres";
+    private static final String MESSAGE = "FORMAT: \r\n\r" + "type-name-bottles-litres";
 
     @Override
     public EditMessageText editMessage(CallbackQuery query) {

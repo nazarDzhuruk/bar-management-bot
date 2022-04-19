@@ -3,8 +3,6 @@ package com.drypalm.easybusiness.botcore;
 import com.drypalm.easybusiness.handler.HandlerService;
 import com.drypalm.easybusiness.handler.callback.CallbackType;
 import com.drypalm.easybusiness.handler.message.MessageCommand;
-import com.drypalm.easybusiness.model.Employee;
-import com.drypalm.easybusiness.service.EmployeeService;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -16,7 +14,6 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 
 @Component
@@ -24,12 +21,9 @@ public class BusinessBot extends TelegramLongPollingBot {
 
     private final BotConfiguration configuration;
     private final HandlerService handlerService;
-    private final EmployeeService employeeService;
     private boolean switchToMsg = false;
-    private String accept;
 
-    public BusinessBot(EmployeeService employeeService, HandlerService handlerService, BotConfiguration configuration) {
-        this.employeeService = employeeService;
+    public BusinessBot(HandlerService handlerService, BotConfiguration configuration) {
         this.handlerService = handlerService;
         this.configuration = configuration;
     }
@@ -69,6 +63,7 @@ public class BusinessBot extends TelegramLongPollingBot {
                 switchToMsg = false;
                 execute(SendMessage.builder().chatId(update.getMessage()
                         .getChatId().toString()).text("Stop").build());
+                return;
             }
             if (switchToMsg) {
 
@@ -89,6 +84,8 @@ public class BusinessBot extends TelegramLongPollingBot {
 
             if (update.getCallbackQuery().getData().split(":")[0].equals("<<")) {
                 callback = update.getCallbackQuery().getData().split(":")[1];
+            } else if (update.getCallbackQuery().getData().split(":")[1].equals("type")) {
+                callback = update.getCallbackQuery().getData().split(":")[1];
             } else {
                 callback = update.getCallbackQuery().getData().split(":")[0];
             }
@@ -97,7 +94,6 @@ public class BusinessBot extends TelegramLongPollingBot {
 
             if (callback.toLowerCase(Locale.ROOT).startsWith("accept ")) {
                 switchToMsg = true;
-                accept = callback.split(" ")[1];
             }
 
             CallbackType callbackType = Arrays.stream(CallbackType.values())
