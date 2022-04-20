@@ -22,6 +22,7 @@ public class BusinessBot extends TelegramLongPollingBot {
     private final BotConfiguration configuration;
     private final HandlerService handlerService;
     private boolean switchToMsg = false;
+    private String mainCall;
 
     public BusinessBot(HandlerService handlerService, BotConfiguration configuration) {
         this.handlerService = handlerService;
@@ -53,9 +54,7 @@ public class BusinessBot extends TelegramLongPollingBot {
     @Override
     @SneakyThrows
     public void onUpdateReceived(Update update) {
-
         if (update.getMessage() != null && update.getMessage().hasText() || switchToMsg) {
-
             String msg = update.getMessage().getText();
             System.out.println(switchToMsg);
 
@@ -66,8 +65,11 @@ public class BusinessBot extends TelegramLongPollingBot {
                 return;
             }
             if (switchToMsg) {
+                System.out.println(mainCall);
 
-                handlerService.processMessage(MessageCommand.ADD_ALCO).sendMessage(update.getMessage());
+                update.getMessage().setText(mainCall.split(" ")[1] + ":" + update.getMessage().getText());
+
+                handlerService.processMessage(MessageCommand.ADD).sendMessage(update.getMessage());
 
                 execute(SendMessage.builder().chatId(update.getMessage()
                         .getChatId().toString()).text(update.getMessage().getText()).build());
@@ -94,6 +96,8 @@ public class BusinessBot extends TelegramLongPollingBot {
 
             if (callback.toLowerCase(Locale.ROOT).startsWith("accept ")) {
                 switchToMsg = true;
+                mainCall = callback;
+                System.out.println(mainCall);
             }
 
             CallbackType callbackType = Arrays.stream(CallbackType.values())
