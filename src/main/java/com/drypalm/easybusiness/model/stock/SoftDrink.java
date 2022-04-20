@@ -92,4 +92,46 @@ public class SoftDrink {
     public int hashCode() {
         return Objects.hash(id, productCode, name, softStock);
     }
+
+    public static SoftDrink.SoftDrinkBuilder builder() {
+        return new SoftDrinkBuilder();
+    }
+
+    public static class SoftDrinkBuilder {
+
+        private int productCode;
+        private String name;
+        private int quantityBottle;
+        private float litre;
+        private Stock softStock;
+
+        public SoftDrink.SoftDrinkBuilder productCode(int productCode) {
+            this.productCode = productCode;
+            return this;
+        }
+
+        public SoftDrink.SoftDrinkBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public SoftDrink.SoftDrinkBuilder quantityBottle(int quantityBottle) {
+            this.quantityBottle = quantityBottle;
+            return this;
+        }
+
+        public SoftDrink.SoftDrinkBuilder litre(float litre) {
+            this.litre = litre;
+            return this;
+        }
+
+        public SoftDrink.SoftDrinkBuilder softStock(Stock softStock) {
+            this.softStock = softStock;
+            return this;
+        }
+
+        public SoftDrink build() {
+            return new SoftDrink(this.productCode, this.name, this.quantityBottle, this.litre);
+        }
+    }
 }
