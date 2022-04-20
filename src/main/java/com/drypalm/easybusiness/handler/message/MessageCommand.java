@@ -5,7 +5,7 @@ public enum MessageCommand {
     START("/start", "sends main menu;"),
     HELP("/help", "sends all commands"),
     REGISTER("/r", "register new user (only admin)"),
-    LOGIN("/li", "login as employee: example: /l ****"),
+    LOGIN("/li", "login as employee: example: /li ****"),
     LOGOUT("/lo", "logout user"),
     EXIT("/exit", "stops application (only admin)"),
     STOP("/stop", "command to stop accepting goods"),
