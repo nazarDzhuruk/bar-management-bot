@@ -6,15 +6,16 @@ public enum KeyboardType {
     ADD("add"),
     MAIN_ACCEPT("main_accept"),
     HELPFUL("helpful"),
-    ALCOHOL_CATEGORY("category");
+    ALCOHOL_CATEGORY("alcohol_category"),
+    SOFT_CATEGORY("soft_category");
 
-    private final String button;
+    private final String keyboard;
 
     KeyboardType(String action) {
-        this.button = action;
+        this.keyboard = action;
     }
 
-    public String getButton() {
-        return button;
+    public String getKeyboard() {
+        return keyboard;
     }
 }

@@ -18,7 +18,7 @@ public class MenuKeyboardService implements KeyboardService {
     public InlineKeyboardMarkup getKeyboard(String callback) {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
-        buttons.add(ButtonCreator.createButtons(List.of(SELL.getButton(), ADD.getButton()), callback));
+        buttons.add(ButtonCreator.createButtons(List.of(SELL.getKeyboard(), ADD.getKeyboard()), callback));
 
         return InlineKeyboardMarkup.builder().keyboard(buttons).build();
     }
