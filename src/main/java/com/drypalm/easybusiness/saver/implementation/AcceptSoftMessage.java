@@ -1,23 +1,26 @@
 package com.drypalm.easybusiness.saver.implementation;
 
-import com.drypalm.easybusiness.model.stock.AlcoholDrink;
+import com.drypalm.easybusiness.handler.message.MessageCommand;
+import com.drypalm.easybusiness.handler.message.TelegramMessage;
+import com.drypalm.easybusiness.model.stock.SoftDrink;
 import com.drypalm.easybusiness.model.stock.Stock;
 import com.drypalm.easybusiness.saver.SaveCategory;
 import com.drypalm.easybusiness.saver.Saver;
-import com.drypalm.easybusiness.service.AlcoholDrinkService;
+import com.drypalm.easybusiness.service.SoftDrinkService;
 import com.drypalm.easybusiness.service.StockService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
-public class AcceptAlcoholMessage implements Saver {
+public class AcceptSoftMessage implements Saver {
     private final StockService stockService;
-    private final AlcoholDrinkService alcoholDrinkService;
+    private final SoftDrinkService softDrinkService;
+    private static final String REGEX = "-";
 
-    public AcceptAlcoholMessage(StockService stockService, AlcoholDrinkService alcoholDrinkService) {
+    public AcceptSoftMessage(StockService stockService, SoftDrinkService softDrinkService) {
         this.stockService = stockService;
-        this.alcoholDrinkService = alcoholDrinkService;
+        this.softDrinkService = softDrinkService;
     }
 
     @Override
@@ -31,17 +34,13 @@ public class AcceptAlcoholMessage implements Saver {
             Stock stock = new Stock();
             stockService.add(stock);
         }
-        AlcoholDrink drink = AlcoholDrink.builder().type(product[0]).name(product[1])
-                .quantityBottle(Integer.parseInt(product[2])).litre(Float.parseFloat(product[3]))
-                .stock(stockService.getMainStock()).build();
-
-        alcoholDrinkService.add(drink);
-
+        softDrinkService.add(SoftDrink.builder().name(product[0]).quantityBottle(Integer.parseInt(product[1]))
+                .litre(Float.parseFloat(product[2])).softStock(stockService.getMainStock()).build());
         return SendMessage.builder().chatId(chatId).text("Success").build();
     }
 
     @Override
     public SaveCategory getImplementation() {
-        return SaveCategory.ALCOHOL;
+        return SaveCategory.SOFT;
     }
 }
