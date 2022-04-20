@@ -2,7 +2,7 @@ package com.drypalm.easybusiness.service;
 
 import java.util.List;
 
-interface UtilityService<T> {
+public interface UtilityService<T> {
 
     T add(T entity);
 
