@@ -1,8 +1,10 @@
-package com.drypalm.easybusiness.seller;
+package com.drypalm.easybusiness.seller.implementation;
 
 import com.drypalm.easybusiness.keyboard.MainButtons;
 import com.drypalm.easybusiness.keyboard.implementation.ButtonCreator;
 import com.drypalm.easybusiness.model.stock.AlcoholDrink;
+import com.drypalm.easybusiness.seller.SellByType;
+import com.drypalm.easybusiness.seller.SellType;
 import com.drypalm.easybusiness.service.StockService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -14,11 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class SellAlcoholByTypeCallback implements SellByType {
+public class SellAlcoholCallback implements SellByType {
     private final StockService stockService;
     private static final String COLON = ":";
 
-    public SellAlcoholByTypeCallback(StockService stockService) {
+    public SellAlcoholCallback(StockService stockService) {
         this.stockService = stockService;
     }
 
@@ -43,6 +45,7 @@ public class SellAlcoholByTypeCallback implements SellByType {
     }
 
     @Override
-    public SellType getImplementation() {return SellType
+    public SellType getImplementation() {
+        return SellType.ALCOHOL;
     }
 }

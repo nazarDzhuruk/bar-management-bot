@@ -1,7 +1,9 @@
-package com.drypalm.easybusiness.seller;
+package com.drypalm.easybusiness.seller.implementation;
 
 import com.drypalm.easybusiness.keyboard.KeyboardFactory;
 import com.drypalm.easybusiness.keyboard.KeyboardType;
+import com.drypalm.easybusiness.seller.SellByType;
+import com.drypalm.easybusiness.seller.SellType;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
@@ -24,6 +26,6 @@ public class SellSoftCallback implements SellByType {
     @Override
     public SellType getImplementation() {
         
-        return SellType.SOFT;
+        return SellType.SELL_SOFT;
     }
 }
