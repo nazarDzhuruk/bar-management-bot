@@ -14,9 +14,6 @@ import static com.drypalm.easybusiness.keyboard.MainButtons.MAIN_MENU;
 
 @Component
 public class SellKeyboardService implements KeyboardService {
-    private static final String ALCOHOL = "ALCOHOL";
-    private static final String SOFT = "SOFT";
-    private static final String COCKTAIL = "COCKTAIL";
 
     @Override
     public InlineKeyboardMarkup getKeyboard(String callback) {
