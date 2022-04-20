@@ -1,7 +1,5 @@
-package com.drypalm.easybusiness.handler.callback.implementation;
+package com.drypalm.easybusiness.seller;
 
-import com.drypalm.easybusiness.handler.callback.CallbackType;
-import com.drypalm.easybusiness.handler.callback.TelegramCallback;
 import com.drypalm.easybusiness.keyboard.MainButtons;
 import com.drypalm.easybusiness.keyboard.implementation.ButtonCreator;
 import com.drypalm.easybusiness.model.stock.AlcoholDrink;
@@ -16,11 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class AlcoholTypeCallback implements TelegramCallback {
+public class SellAlcoholByTypeCallback implements SellByType {
     private final StockService stockService;
     private static final String COLON = ":";
 
-    public AlcoholTypeCallback(StockService stockService) {
+    public SellAlcoholByTypeCallback(StockService stockService) {
         this.stockService = stockService;
     }
 
@@ -37,7 +35,7 @@ public class AlcoholTypeCallback implements TelegramCallback {
                         String.valueOf(a.getLitre())), "t")).collect(Collectors.toList());
 
         buttons.add(ButtonCreator.createButtons(List
-                .of(MainButtons.BACK.getButton(), MainButtons.MAIN_MENU.getButton()), ""));
+                .of(MainButtons.BACK.getButton(), MainButtons.MAIN_MENU.getButton()), "sell_alcohol"));
 
         return EditMessageText.builder()
                 .chatId(chatId).messageId(messageId).text("choose: ")
@@ -45,7 +43,6 @@ public class AlcoholTypeCallback implements TelegramCallback {
     }
 
     @Override
-    public CallbackType getImplementation() {
-        return CallbackType.TYPE;
+    public SellType getImplementation() {return SellType
     }
 }

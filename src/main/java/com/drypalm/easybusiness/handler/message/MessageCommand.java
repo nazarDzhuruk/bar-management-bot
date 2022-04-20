@@ -8,7 +8,9 @@ public enum MessageCommand {
     LOGIN("/li", "login as employee: example: /l ****"),
     LOGOUT("/lo", "logout user"),
     EXIT("/exit", "stops application (only admin)"),
-    ADD_ALCO("/qweewq", "");
+    STOP("/stop", "command to stop accepting goods"),
+
+    ADD("emptyStringWithoutCommand", "");
 
     private final String command;
     private final String description;

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.util.List;
-
 @Component
 public class AcceptAlcoholMessage implements TelegramMessage {
     private final StockService stockService;
@@ -27,15 +25,13 @@ public class AcceptAlcoholMessage implements TelegramMessage {
         String chatId = message.getChatId().toString();
         String[] product = message.getText().split("-");
 
-        List<Stock> stocks = stockService.index();
-        if (stocks.isEmpty()) {
+        if (stockService.index().isEmpty()) {
             Stock stock = new Stock();
-            stocks.add(stock);
             stockService.add(stock);
         }
         AlcoholDrink drink = AlcoholDrink.builder().type(product[0]).name(product[1])
                 .quantityBottle(Integer.parseInt(product[2])).litre(Float.parseFloat(product[3]))
-                .stock(stocks.get(0)).build();
+                .stock(stockService.getMainStock()).build();
 
         alcoholDrinkService.add(drink);
 
@@ -44,6 +40,6 @@ public class AcceptAlcoholMessage implements TelegramMessage {
 
     @Override
     public MessageCommand getImplementation() {
-        return MessageCommand.ADD_ALCO;
+        return MessageCommand.ADD_ALCOHOL;
     }
 }
