@@ -33,7 +33,7 @@ public class StartMessage implements TelegramMessage {
             return SendMessage.builder().chatId(chatId).text("Hello again, " + username)
                     .replyMarkup(factory.getService(KeyboardType.MENU).getKeyboard("main")).build();
         } else return SendMessage.builder().chatId(chatId).text("You are not logged in." + REGEX +
-                "Please enter /l your_unique_id").build();
+                "Please enter /li your_unique_id").build();
     }
 
     @Override

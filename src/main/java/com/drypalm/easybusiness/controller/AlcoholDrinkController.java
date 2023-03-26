@@ -19,9 +19,6 @@ public class AlcoholDrinkController {
         this.drinkService = drinkService;
     }
 
-
-
-
     @GetMapping("/all")
     public List<AlcoholDrink> getAll() {
         return drinkService.index();

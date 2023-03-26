@@ -20,6 +20,7 @@ public class SellAlcoholCallback implements SellByType {
     private final StockService stockService;
     private static final String COLON = ":";
 
+
     public SellAlcoholCallback(StockService stockService) {
         this.stockService = stockService;
     }

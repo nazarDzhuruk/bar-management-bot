@@ -81,7 +81,7 @@ public class BusinessBot extends TelegramLongPollingBot {
 
             execute(handlerService.processMessage(command).sendMessage(update.getMessage()));
 
-        } else if (update.hasCallbackQuery()) {
+        } if (update.hasCallbackQuery()) {
             String callback;
 
             if (update.getCallbackQuery().getData().split(":")[0].equals("<<")) {
